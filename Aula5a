@@ -1,0 +1,197 @@
+package com.mycompany.aula5a;
+public class Conta {
+    private int numConta;
+    protected String tipo;
+    public String nome;
+    public float saldoCC;
+    public float saldoCP;
+    public boolean statusCC; 
+    public boolean statusCP;
+
+    public Conta(String nome) {
+        this.nome = nome;
+        this.saldoCC = 0.00f;
+        this.saldoCP = 0.00f;
+        this.statusCC = false;
+        this.statusCP = false;
+    }
+    
+    
+    public String toString() {
+        return "Conta{" + 
+               "numConta=" + numConta + 
+               ", tipo=" + tipo + 
+               ", nome=" + nome +
+               ", saldo Conta Poupança=" + saldoCP + 
+               ", saldo Conta Corrente=" + saldoCC + 
+               ", Conta Poupança=" + statusCP + 
+               ", Conta Corrente=" + statusCC + '}';
+    }
+    
+    public void abrirContaC(){
+        if(statusCC == true){
+            System.out.println("Voce já tem Conta Corrente ativa!!");
+        }
+        if(statusCC ==false && statusCP == true){
+            this.saldoCC = 50.00f;
+            System.out.println("Parabéns, sua Conta Corrente foi aberta com sucesso seu saldo é de "+ this.saldoCC);
+            this.tipo=" CC / CP";
+            this.statusCC = true;
+        }
+        else{
+            this.numConta += numConta +1;
+            this.saldoCC = 50.00f;
+            System.out.println("Parabéns, sua Conta Corrente foi aberta com sucesso seu saldo é de "+ this.saldoCC);
+            this.tipo="CC";
+            this.statusCC=true;
+        }
+    }
+    
+    public void abrirContaP(){
+        if(statusCP == true){
+            System.out.println("Voce já tem Conta Corrente ativa!!");
+        }
+        if(statusCP == false && statusCC == true){
+            this.saldoCP = 150.00f;
+            System.out.println("Parabéns, sua Conta Poupança foi aberta com sucesso seu saldo é de "+ this.saldoCP);
+            this.tipo = " CP / CC";
+            statusCP = true;
+        }
+        else{
+            this.numConta += numConta +1;
+            this.saldoCP = 150.00f;
+            System.out.println("Parabéns, sua Conta Poupança foi aberta com sucesso seu saldo é de "+ this.saldoCP);
+            this.tipo = "CP";
+            this.statusCP = true;
+        }
+    }
+    
+    public void fecharContaC(){
+        if(statusCC==false){
+            System.out.println("Não possui Conta Corrente!!");
+        }
+        else{
+            if(saldoCC!=0.00f){
+                System.out.println("Sua conta possui pendência");
+            }
+            else{
+                if(statusCP == true){ // CLIENTE COM CONTA POUPANÇA ATIVA
+                    System.out.println("Sua Conta Poupança foi fechada!!");
+                    this.tipo="CP";
+                    this.statusCC=false;
+                }
+                else{ // CLIENTE SEM CONTA POUPANÇA E OK PARA FECHAMENTO
+                    System.out.println(" Cliente sem conta poupança e ok para fechamento");
+                    this.tipo="null";
+                    this.statusCC=false;
+                }
+            }    
+        }
+    }
+    
+    public void fecharContaP(){
+        if(statusCP==false){
+            System.out.println("Não possui Conta Corrente!!");
+        }
+        else{
+            if(saldoCP!=0.00f){
+                System.out.println("Sua conta possui pendência");
+            }
+            else{
+                if(statusCC == true){ // CLIENTE COM CONTA CORRENTE ATIVA
+                    System.out.println("Sua Conta Poupança foi fechada!!");
+                    this.tipo="CC";
+                    this.statusCP=false;
+                }
+                else{ // CLIENTE SEM CONTA CORRENTE E OK PARA FECHAMENTO
+                    System.out.println("Sua Conta Poupança foi fechada!!");
+                    this.tipo="null";
+                    this.statusCP=false;
+                }
+            }    
+        }
+    }
+    
+    public void SacarCC(float saque){
+        if(this.saldoCC>=saque){
+            this.saldoCC -= saque;
+        }
+        else{
+            System.out.println("Voce não tem essa quantia!");
+        }
+    }
+    
+    public void depositarCC(float depositar){
+        this.saldoCC += depositar ;
+    }
+    
+    public void SacarCP(float saque){
+        if(this.saldoCP>=saque){
+            this.saldoCP -= saque;
+        }
+        else{
+            System.out.println("Voce não tem saldo!");
+        }
+    }
+    
+    public void depositarCP(float depositar){
+        this.saldoCP+=depositar;
+    }
+
+    public int getNumConta() {
+        return numConta;
+    }
+
+    public void setNumConta(int numConta) {
+        this.numConta = numConta;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public float getSaldoCC() {
+        return saldoCC;
+    }
+
+    public void setSaldoCC(float saldoCC) {
+        this.saldoCC = saldoCC;
+    }
+
+    public float getSaldoCP() {
+        return saldoCP;
+    }
+
+    public void setSaldoCP(float saldoCP) {
+        this.saldoCP = saldoCP;
+    }
+    
+    public boolean isStatusCC() {
+        return statusCC;
+    }
+
+    public void setStatusCC(boolean status) {
+        this.statusCC = status;
+    }
+    
+    public boolean isStatusCP() {
+        return statusCP;
+    }
+
+    public void setStatusCP(boolean status) {
+        this.statusCP = status;
+    }
+    
+}
